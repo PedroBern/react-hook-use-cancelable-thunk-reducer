@@ -16,7 +16,7 @@ export function useCancelableReducer(
         ? console.log("Canceled: ", action.type)
         : null
       : regularDispatch(action)),
-    [regularDispatch]
+    [regularDispatch, verbose]
   );
 
   useEffect(
