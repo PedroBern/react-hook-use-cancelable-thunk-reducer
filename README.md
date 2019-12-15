@@ -56,6 +56,7 @@ useReducer last argument.
 The following example create a simple case when you would like to cancel a dispatch, by unmounting a component during a scheduled dispatch action.
 
 ```javascript
+import ReactDOM from "react-dom";
 import React, { useState } from 'react';
 import useReducer from 'use-cancelable-thunk-reducer';
 
@@ -109,4 +110,7 @@ function App() {
     </div>
   )
 }
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
 ```
