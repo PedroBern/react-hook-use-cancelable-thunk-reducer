@@ -1,11 +1,19 @@
 {
   "name": "use-cancelable-thunk-reducer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React Hook useReducer with cancelable dispatch of thunks",
   "author": "pedrobern",
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "homepage": "https://github.com/pedrobern/react-hook-use-cancelable-thunk-reducer",
+  "bugs": {
+    "url": "https://github.com/pedrobern/react-hook-use-cancelable-thunk-reducer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedrobern/react-hook-use-cancelable-thunk-reducer.git"
+  },
   "keywords": [
     "useReducer",
     "thunk",
