@@ -1,0 +1,5 @@
+{
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"],
+  "collectCoverageFrom": ["src/index.js"],
+  "coverageDirectory": "<rootDir>/coverage"
+}

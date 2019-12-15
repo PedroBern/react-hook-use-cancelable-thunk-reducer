@@ -1,0 +1,72 @@
+{
+  "name": "useCancelableReducer",
+  "version": "1.0.0",
+  "description": "React Hook useReducer with cancelable dispatch of thunks",
+  "author": "pedrobern",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "keywords": [
+    "useReducer",
+    "thunk",
+    "cancelable",
+    "abortable",
+    "react",
+    "hooks",
+    "redux-thunk"
+  ],
+  "files": [
+    "lib",
+    "es",
+    "src",
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint src/index.js test/index.test.jsx",
+    "lint-fix": "eslint --fix src/index.js test/index.test.jsx",
+    "test": "jest --config ./jest.config.json",
+    "coverage": "jest --config ./jest.config.json --coverage",
+    "clean": "rimraf lib dist es",
+    "prepare": "yarn clean && yarn lint && yarn test && yarn build",
+    "build": "build:commonjs && yarn build:umd && yarn build:umd:min && yarn build:es",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development yarn webpack",
+    "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production yarn webpack"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/runtime": "^7.7.6",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "cross-env": "^6.0.3",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-react": "^7.17.0",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "react": "16.8",
+    "react-dom": "^16.8.0",
+    "rimraf": "^3.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint",
+      "pre-push": "yarn test"
+    }
+  }
+}

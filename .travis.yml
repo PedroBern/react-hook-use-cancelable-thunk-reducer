@@ -1,0 +1,21 @@
+language: node_js
+
+node_js:
+  - 11
+  - 10
+  - 9
+  - 8
+  - 7
+  - 6
+
+script:
+  - yarn build
+  - yarn test
+
+jobs:
+  include:
+    - stage: coverage
+      node_js: "6"
+      script:
+        - yarn cover
+        - yarn codecov
