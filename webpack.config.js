@@ -3,13 +3,7 @@ const path = require("path");
 
 const { NODE_ENV } = process.env;
 
-const plugins = [
-  new webpack.DefinePlugin({
-    "process.env.NODE_ENV": JSON.stringify(NODE_ENV)
-  })
-];
-
-const filename = `use-cancelable-thunk-reducer{NODE_ENV === 'production' ? '.min' : ''}.js`;
+const filename = `use-cancelable-thunk-reducer${NODE_ENV === 'production' ? '.min' : ''}.js`;
 
 module.exports = {
   mode: NODE_ENV === "production" ? "production" : "development",
@@ -31,5 +25,4 @@ module.exports = {
     libraryTarget: "umd"
   },
 
-  plugins
 };
