@@ -55,6 +55,8 @@ useReducer last argument.
 
 The following example create a simple case when you would like to cancel a dispatch, by unmounting a component during a scheduled dispatch action.
 
+Open on [codesanbox](https://codesandbox.io/s/use-cancelable-thunk-reducer-lirs9).
+
 ```javascript
 import ReactDOM from "react-dom";
 import React, { useState } from 'react';
@@ -93,7 +95,9 @@ function Counter() {
   return (
     <div>
       <p>Count: {state.count}</p>
-      <button onClick={() => dispatch(incrementAsync())}>increment in {time} seconds</button>
+      <button onClick={() => dispatch(incrementAsync())}>
+        increment in {time} seconds
+      </button>
     </div>
   );
 }
@@ -102,10 +106,20 @@ function App() {
   const [show, setShow] = useState(false);
   return (
     <div>
-      <p>Mount the component and increment it.</p>
-      <p>Increment one more time and unmount before the action is completed.</p>
-      <p>After {time} seconds you should see "Canceled: increment" on the console.</p>
-      <button onClick={() => setShow(!show)}>{show ? 'unmount' : 'mount'}</button>
+      <p>
+        Mount the component and increment it.
+      </p>
+      <p>
+        Increment one more time and unmount
+        before the action is completed.
+      </p>
+      <p>
+        After {time} seconds you should see
+        "Canceled: increment" on the console.
+      </p>
+      <button onClick={() => setShow(!show)}>
+        {show ? 'unmount' : 'mount'}
+      </button>
       {show && <Counter />}
     </div>
   )
