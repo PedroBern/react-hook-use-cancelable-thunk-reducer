@@ -1,5 +1,5 @@
 {
-  "name": "useCancelableReducer",
+  "name": "use-cancelable-thunk-reducer",
   "version": "1.0.0",
   "description": "React Hook useReducer with cancelable dispatch of thunks",
   "author": "pedrobern",
