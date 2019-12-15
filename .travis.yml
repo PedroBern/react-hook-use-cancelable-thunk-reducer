@@ -1,5 +1,8 @@
 language: node_js
 
+install:
+  - yarn add -g codecov
+
 node_js:
   - 11
   - 10
@@ -9,7 +12,6 @@ node_js:
   - 6
 
 script:
-  - yarn build
   - yarn test
 
 jobs:
@@ -17,5 +19,5 @@ jobs:
     - stage: coverage
       node_js: "6"
       script:
-        - yarn cover
-        - yarn codecov
+        - yarn coverage
+        - codecov
