@@ -4,21 +4,15 @@ install:
   - yarn
   - npm install -g codecov
 
-node_js:
-  - 11
-  - 10
-  - 9
-  - 8
-  - 7
-  - 6
-
-script:
-  - yarn test
-
 jobs:
   include:
+    - state: test
+      node_js:
+        - 11
+      script:
+        - yarn test
     - stage: coverage
-      node_js: "6"
+      node_js: "11"
       script:
         - yarn coverage
         - codecov
