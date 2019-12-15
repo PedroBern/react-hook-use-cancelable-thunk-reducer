@@ -53,7 +53,7 @@ useReducer last argument.
 
 ## Example
 
-The following example creates a simple case when you would like to cancel a dispatch, by unmounting a component during a sheduled dispatch action.
+The following example creates a simple case when you would like to cancel a dispatch, by unmounting a component during a scheduled dispatch action.
 
 ```javascript
 import React, { useState } from 'react';
