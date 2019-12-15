@@ -1,7 +1,7 @@
 language: node_js
 
 install:
-  - yarn add -g codecov
+  - npm install -g codecov
 
 node_js:
   - 11
