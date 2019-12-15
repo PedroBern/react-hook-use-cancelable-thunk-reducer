@@ -29,7 +29,7 @@
     "coverage": "jest --config ./jest.config.json --coverage",
     "clean": "rimraf lib dist es",
     "prepare": "yarn clean && yarn lint && yarn test && yarn build",
-    "build": "build:commonjs && yarn build:umd && yarn build:umd:min && yarn build:es",
+    "build": "yarn build:commonjs && yarn build:umd && yarn build:umd:min && yarn build:es",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development yarn webpack",
