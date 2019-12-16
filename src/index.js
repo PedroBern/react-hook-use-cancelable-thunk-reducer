@@ -42,7 +42,7 @@ export default function useCancelableThunkReducer(
     init
   );
 
-  const getState = () => state;
+  const getState = () => ({ ...state });
 
   const dispatchThunk = action => (typeof action === "function"
     ? action(dispatch, getState)
