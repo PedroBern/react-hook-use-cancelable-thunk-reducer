@@ -58,6 +58,10 @@ The following example create a simple case when you would like to cancel a dispa
 Open on [codesanbox](https://codesandbox.io/s/use-cancelable-thunk-reducer-lirs9).
 
 ```javascript
+import ReactDOM from "react-dom";
+import React, { useState } from "react";
+import useReducer from "use-cancelable-thunk-reducer";
+
 const initialState = { count: 0 };
 const time = 3;
 const callback = action => console.log("Canceled:", action.type);

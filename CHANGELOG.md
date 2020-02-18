@@ -1,3 +1,7 @@
+## v1.1.1
+
+- Fix typo in README
+
 ## v1.1.0
 
 - Add callback argument.
