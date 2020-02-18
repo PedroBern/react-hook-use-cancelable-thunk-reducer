@@ -7,7 +7,7 @@ import useCancelableThunkReducer from "../src/index";
 const myMock = jest.fn();
 const getStateMock = jest.fn(x => x);
 
-const log = jest.fn()
+const log = jest.fn();
 
 function reducer(state, action) {
   switch (action.type) {
