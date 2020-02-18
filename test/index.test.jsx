@@ -7,9 +7,7 @@ import useCancelableThunkReducer from "../src/index";
 const myMock = jest.fn();
 const getStateMock = jest.fn(x => x);
 
-global.console = {
-  log: jest.fn()
-};
+const log = jest.fn()
 
 function reducer(state, action) {
   switch (action.type) {
@@ -39,11 +37,11 @@ const incrementAsyncActionThunk = () => async (dispatch, getState) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const Counter = ({ initialState, init, verbose }) => {
+const Counter = ({ initialState, init, callback }) => {
   const [state, dispatch] = useCancelableThunkReducer(
     reducer,
     initialState,
-    verbose,
+    callback,
     init
   );
   return (
@@ -71,10 +69,10 @@ const Counter = ({ initialState, init, verbose }) => {
 const setupWrapper = ({
   state = { count: 0 },
   init = undefined,
-  verbose = false
+  callback = undefined
 } = {}) => {
   const wrapper = mount(
-    <Counter initialState={state} init={init} verbose={verbose} />
+    <Counter initialState={state} init={init} callback={callback} />
   );
   const count = wrapper.find("#count").first();
   const increment = wrapper.find("#increment").first();
@@ -107,7 +105,9 @@ describe("useCancelableThunkReducer", () => {
   });
 
   it("cancel actions when unmounted", () => {
-    const { wrapper, count, incrementAsync } = setupWrapper({ verbose: true });
+    const { wrapper, count, incrementAsync } = setupWrapper({
+      callback: (action) => log("Canceled:", action.type)
+    });
 
     expect(setTimeout).toHaveBeenCalledTimes(1);
     expect(myMock.mock.calls.length).toBe(0);
@@ -128,7 +128,7 @@ describe("useCancelableThunkReducer", () => {
       jest.runOnlyPendingTimers();
     });
 
-    expect(global.console.log).toHaveBeenCalledWith("Canceled: ", "increment");
+    expect(log).toHaveBeenCalledWith("Canceled:", "increment");
 
     // setTimeout called one more time,
     expect(setTimeout).toHaveBeenCalledTimes(3);
@@ -138,7 +138,7 @@ describe("useCancelableThunkReducer", () => {
 
   it("cancel thunk actions when unmounted", () => {
     const { wrapper, count, incrementAsyncThunk } = setupWrapper({
-      verbose: true
+      callback: (action) => log("Canceled:", action.type)
     });
 
     expect(setTimeout).toHaveBeenCalledTimes(1);
@@ -160,7 +160,7 @@ describe("useCancelableThunkReducer", () => {
       jest.runOnlyPendingTimers();
     });
 
-    expect(global.console.log).toHaveBeenCalledWith("Canceled: ", "increment");
+    expect(log).toHaveBeenCalledWith("Canceled:", "increment");
 
     // setTimeout called one more time,
     expect(setTimeout).toHaveBeenCalledTimes(3);
@@ -168,15 +168,17 @@ describe("useCancelableThunkReducer", () => {
     expect(myMock.mock.calls.length).toBe(1);
   });
 
-  it("console.log on verbose", () => {
-    const { wrapper, incrementAsync } = setupWrapper({ verbose: true });
+  it("console.log on callback", () => {
+    const { wrapper, incrementAsync } = setupWrapper({
+      callback: (action) => log("Canceled:", action.type)
+    });
 
     incrementAsync.simulate("click", { button: 0 });
     wrapper.unmount();
     act(() => {
       jest.runOnlyPendingTimers();
     });
-    expect(global.console.log).toHaveBeenCalledWith("Canceled: ", "increment");
+    expect(log).toHaveBeenCalledWith("Canceled:", "increment");
   });
 
   it("pass right init function", () => {
@@ -212,7 +214,7 @@ describe("useCancelableThunkReducer", () => {
     expect(getStateMock.mock.calls[1][0]).toStrictEqual({ count: 1 });
   });
 
-  it("don't console.log if not verbose", () => {
+  it("don't call a callback if it is undefined", () => {
     const wrapper = mount(<Counter initialState={{ count: 0 }} />);
     const incrementAsync = wrapper.find("#incrementAsync").first();
     incrementAsync.simulate("click", { button: 0 });
@@ -220,6 +222,6 @@ describe("useCancelableThunkReducer", () => {
     act(() => {
       jest.runOnlyPendingTimers();
     });
-    expect(global.console.log).not.toHaveBeenCalled();
+    expect(log).not.toHaveBeenCalled();
   });
 });

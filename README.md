@@ -32,7 +32,7 @@ import useCancelableThunkReducer from 'use-cancelable-thunk-reducer';
 const [state, dispatch] = useCancelableThunkReducer(
   reducer,
   initialState,
-  verbose,
+  callback,
   init
 );
 
@@ -45,8 +45,8 @@ useReducer first argument.
 ### `initialState`
 useReducer second argument.
 
-### `verbose`
-default is `false`, if `true` will console.log `Canceled: ${action.type}` when an action is canceled.
+### `callback`
+default is `undefined`, if is a `function`, when some action is canceled it is called with the action argument: `callback(action)`.
 
 ### `init`
 useReducer last argument.
@@ -58,13 +58,9 @@ The following example create a simple case when you would like to cancel a dispa
 Open on [codesanbox](https://codesandbox.io/s/use-cancelable-thunk-reducer-lirs9).
 
 ```javascript
-import ReactDOM from "react-dom";
-import React, { useState } from "react";
-import useReducer from "use-cancelable-thunk-reducer";
-
 const initialState = { count: 0 };
 const time = 3;
-const verbose = true;
+const callback = action => console.log("Canceled:", action.type);
 
 function reducer(state, action) {
   switch (action.type) {
@@ -81,14 +77,16 @@ function sleep(s) {
 
 const incrementAsync = () => async (dispatch, getState) => {
   const state = getState();
-  console.log("count is", state.count)
-  console.log("sleeping for 3 seconds... unmount the component to cancel this action.")
+  console.log("count is", state.count);
+  console.log(
+    "sleeping for 3 seconds... unmount the component to cancel this action."
+  );
   await sleep(time);
   dispatch({ type: "increment" });
 };
 
 function Counter() {
-  const [state, dispatch] = useReducer(reducer, initialState, verbose);
+  const [state, dispatch] = useReducer(reducer, initialState, callback);
   return (
     <div>
       <p>Count: {state.count}</p>
@@ -99,7 +97,7 @@ function Counter() {
   );
 }
 
-function App() {
+export default function App() {
   const [show, setShow] = useState(false);
   return (
     <div>

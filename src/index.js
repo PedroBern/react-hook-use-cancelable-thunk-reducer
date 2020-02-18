@@ -3,7 +3,7 @@ import { useReducer, useEffect, useCallback } from "react";
 export function useCancelableReducer(
   reducer,
   initialState,
-  verbose = false,
+  callback = undefined,
   init = undefined
 ) {
   const should = { cancel: false };
@@ -12,11 +12,14 @@ export function useCancelableReducer(
 
   const dispatch = useCallback(
     action => (should.cancel
-      ? verbose
-        ? console.log("Canceled: ", action.type)
+      ? callback && (
+        Object.prototype.toString.call(callback) === "[object Function]"
+        || typeof callback === "function"
+        || callback instanceof Function
+      ) ? callback(action)
         : null
       : regularDispatch(action)),
-    [regularDispatch, verbose]
+    [regularDispatch, callback]
   );
 
   useEffect(
@@ -32,13 +35,13 @@ export function useCancelableReducer(
 export default function useCancelableThunkReducer(
   reducer,
   initialState,
-  verbose = false,
+  callback = undefined,
   init = undefined
 ) {
   const [state, dispatch] = useCancelableReducer(
     reducer,
     initialState,
-    verbose,
+    callback,
     init
   );
 
