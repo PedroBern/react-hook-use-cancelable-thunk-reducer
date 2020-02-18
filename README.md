@@ -59,17 +59,17 @@ Open on [codesanbox](https://codesandbox.io/s/use-cancelable-thunk-reducer-lirs9
 
 ```javascript
 import ReactDOM from "react-dom";
-import React, { useState } from 'react';
-import useReducer from 'use-cancelable-thunk-reducer';
+import React, { useState } from "react";
+import useReducer from "use-cancelable-thunk-reducer";
 
-const initialState = {count: 0};
+const initialState = { count: 0 };
 const time = 3;
 const verbose = true;
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'increment':
-      return {count: state.count + 1};
+    case "increment":
+      return { count: state.count + 1 };
     default:
       throw new Error();
   }
@@ -81,14 +81,11 @@ function sleep(s) {
 
 const incrementAsync = () => async (dispatch, getState) => {
   const state = getState();
-  if (state.count > 0) {
-    await sleep(time);
-    dispatch({type: 'increment'})
-  }
-  else {
-    dispatch({type: 'increment'})
-  }
-}
+  console.log("count is", state.count)
+  console.log("sleeping for 3 seconds... unmount the component to cancel this action.")
+  await sleep(time);
+  dispatch({ type: "increment" });
+};
 
 function Counter() {
   const [state, dispatch] = useReducer(reducer, initialState, verbose);
@@ -106,23 +103,13 @@ function App() {
   const [show, setShow] = useState(false);
   return (
     <div>
-      <p>
-        Mount the component and increment it.
-      </p>
-      <p>
-        Increment one more time and unmount
-        before the action is completed.
-      </p>
-      <p>
-        After {time} seconds you should see
-        "Canceled: increment" on the console.
-      </p>
+      <p>Mount the component, increment it and see your console.</p>
       <button onClick={() => setShow(!show)}>
-        {show ? 'unmount' : 'mount'}
+        {show ? "unmount" : "mount"}
       </button>
       {show && <Counter />}
     </div>
-  )
+  );
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
