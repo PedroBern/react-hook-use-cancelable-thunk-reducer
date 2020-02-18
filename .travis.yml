@@ -14,13 +14,3 @@ jobs:
     script:
     - yarn coverage
     - codecov
-  - stage: npm release
-    node_js: '11'
-    deploy:
-      provider: npm
-      email:
-        secure: nx5/i9Ln3fAfMFcwc/WVhxS2hDXTMuLMj8+BxJlcMPShuHVy6/GgKy9JtGpWt0w/o4xczoO4Wn4I3ww485evv8539GWu7DdsRx4r4E2yE9XzAuaGbWON9bzbDPAacnGf9xUKOqXxkZJxygvDC4Mn/kUqmg14kAtuSSIHY1mD6PZKdGd1LcD1n+qVI+AAK25mGEScX6VjJmWmLl/9sM0ipkmmPROhn3mr825d1m7K/vuBdspSunQfgCp5EVKZG6IVP9Gv5mZqNqwgHTh05VPV3nhudtAa7PPUBoO1bVhjv9w3QCsV68/aW5T+PfyHhjTXH/fcYors3E/NEm2vnpZkhNq7B2vZTgBvl3PSQSH3Ncy6pu6a4SSDgNaf6rrandrsx9mHNr15xHNjvPKsL82+9wBKL4CM3qGv3YDEwiVvCs+5Qq5UNEKvR2hiLqX5z/eqSwBabg0KN3mMuwMM+cy/qfFHNSQA3zoa8dcD80+jRxXmKCKJ75bsEJ7dgf3EhopPtCP0ZTL1SizEQ8HQeq1YeA8a+tgdV1yvJWSw2aVnuq+1I07G+6Op4LFFktbmhLtZl7ViSSX0lVucZ/AtO3GKrrCvaV3etE+uIVSqNG/gZHLctM6wui1Lf0ItV1fWeR0c+oI2eoiRrvzJ0TydF9ItETiwnzGWPGQab2kU6T9wS1c=
-      api_key:
-        secure: L7GQ7g8PQIB0ioxkhxcFEIW12oN2R0YcobxGhxCyObqEzKi4AXKSigJqHr3KERj5fCP1zzr4l/xgt9x+ABulF+e4aCbFsCI5Mh7mX7YuktEzo3Yfcnm+1yyhkcMGBuRYsTNs/4y3AyztXBUKA2wMLtUJrIQoPl8s7QUxepHmLKP/JHXfqkwP2RSTE4H8HpsIQp23fljnBzR3D7faxTwJhAZjZkHxGPVN13IZlP6Qg16Iwy9BhQD3g/y0OMW0c9tspXnUYG4LXjVQ0tgUgn9UjGvjYC0XCwaueOtXWMGqAgjT5sJVgrseQX51aCPMM/KwW5uUk1S0st0BRixrslzceGfpIw/XaZajX8iS0XztuXoomlGcK7T5J9IOjQBjXSGCy99YP8BpyaG7g58MrRb+zsksHUdUzgqpGXagUnM4iwncXGeBGf5YGMttAhkwudgmAwm1+qzxLTyp4dKpx3vGOdMACNtZuh7Ti0qj6W5SdjXC7AscdhoWweCMqH/sSauERmZ6fJDSgmYWptwkdUG69F5zFWMzmqKdK3mPIH8ESNaI/L3/vqgk6tqLn9OViJtwdu4/j57aaP0YopP2KvwQ0uDHez9KpDs7h0FPceKc/8W3bMuNyP0WxNds1jc1VB5Mj12tjNN3iAVJvmlRlX5ymbqOA0yynWT1GZbbfVQLaI0=
-      on:
-        tags: true
