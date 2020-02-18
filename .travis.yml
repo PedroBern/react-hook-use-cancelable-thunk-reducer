@@ -15,7 +15,7 @@ jobs:
     - yarn coverage
     - codecov
   - stage: npm release
-    node_js: '6'
+    node_js: '11'
     deploy:
       provider: npm
       email:
