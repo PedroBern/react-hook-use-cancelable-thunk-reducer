@@ -1,3 +1,7 @@
+## v1.1.2
+
+- Add demo to README
+
 ## v1.1.1
 
 - Fix typo in README
