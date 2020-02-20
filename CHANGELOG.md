@@ -1,3 +1,7 @@
+## v1.1.3
+
+- Refactor code.
+
 ## v1.1.2
 
 - Add demo to README

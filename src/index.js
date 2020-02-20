@@ -1,5 +1,11 @@
 import { useReducer, useEffect, useCallback } from "react";
 
+const isFunction = f => (
+  Object.prototype.toString.call(f) === "[object Function]"
+  || typeof f === "function"
+  || f instanceof Function
+);
+
 export function useCancelableReducer(
   reducer,
   initialState,
@@ -12,11 +18,8 @@ export function useCancelableReducer(
 
   const dispatch = useCallback(
     action => (should.cancel
-      ? callback && (
-        Object.prototype.toString.call(callback) === "[object Function]"
-        || typeof callback === "function"
-        || callback instanceof Function
-      ) ? callback(action)
+      ? callback && isFunction(callback)
+        ? callback(action)
         : null
       : regularDispatch(action)),
     [regularDispatch, callback]
@@ -47,7 +50,7 @@ export default function useCancelableThunkReducer(
 
   const getState = () => ({ ...state });
 
-  const dispatchThunk = action => (typeof action === "function"
+  const dispatchThunk = action => (isFunction(action)
     ? action(dispatch, getState)
     : dispatch(action));
 
